@@ -1,0 +1,18 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "*"; //require current dir
+
+$black: #000;
+$gray: #808080;
+$light-gray: #d3d3d3;
+$lighter-gray: #dcdcdc;
+$red: #f00;
+$green: #0f0;
+$blue: #00f;
+$sgi-salmon: #c67171;
+$sgi-brightgray: #c5c1aa;
+
+.wrapper {
+  // border: 1px solid $red;
+  text-align: center;
+}
