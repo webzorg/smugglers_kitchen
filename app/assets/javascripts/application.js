@@ -15,3 +15,27 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+document.addEventListener("turbolinks:load", function() {
+
+  $("#ajax-action").click( function() {
+    const AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
+    request = $.ajax({
+      type: "PATCH",
+      dataType: "json",
+      url: "/home/ajax_action",
+      headers: {
+        'X_CSRF_TOKEN': AUTH_TOKEN,
+      },
+      data: {
+        some_data: {}
+      },
+    })
+    .done((msg) => $(".response-div").html( msg.data ))
+    .fail(() => console.log("Something went wrong."))
+    // .always(() => console.log("complete"));
+  });
+
+});
+
+// sms - ajax patch request.
