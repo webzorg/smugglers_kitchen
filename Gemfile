@@ -12,7 +12,7 @@ gem "rails", "~> 5.1.1"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
 
-gem "bootstrap-sass", "~> 3.3.6"
+gem "bootstrap"
 gem "figaro"
 gem "haml"
 gem "haml-rails" # rails haml:erb2haml
@@ -29,6 +29,9 @@ group :development, :test do
 end
 
 group :development do
+  gem "i18n-tasks", "~> 0.9.6"
+  gem "i18n_generators", "~> 2.1", ">= 2.1.1"
+
   gem "guard-livereload", "~> 2.5", require: false
   gem "pry"
   gem "rack-livereload" # for guard-livereload

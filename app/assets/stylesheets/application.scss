@@ -1,5 +1,5 @@
-@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "alertifyjs/build/css/alertify";
 @import "*"; //require current dir
 
 $black: #000;
@@ -14,5 +14,6 @@ $sgi-brightgray: #c5c1aa;
 
 .wrapper {
   // border: 1px solid $red;
-  text-align: center;
+  // text-align: center;
+  padding: 1em;
 }

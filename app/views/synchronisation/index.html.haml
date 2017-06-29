@@ -1,0 +1,24 @@
+%h1 Synchronisation
+
+%table.custom-table.table.table-bordered.table-hover
+  %thead.thead-default
+    %tr
+      %th #
+      %th Operation Name
+      %th Last Synced
+      %th
+  %tbody
+    - @operations.each.with_index(1) do |operation, index|
+      %tr
+        %td= index
+        %td= operation.operation_name
+        %td= operation.updated_at.localtime
+        %td
+          %button{ class: "synchronise-action btn btn-info",
+                   operation_code: operation.operation_code }
+            Synchronise
+
+
+%button.synchronise-action Ajax
+
+.response-div

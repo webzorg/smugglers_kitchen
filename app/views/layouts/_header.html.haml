@@ -1,33 +1,21 @@
-%nav.navbar.navbar-default
-  .container-fluid
-    .navbar-header
-      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      %a.navbar-brand{:href => "#"} Drunk Octopus
-
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        %li.active
-          %a{:href => "#"} Link
-        %li
-          %a{:href => "#"} Link
-      %ul.nav.navbar-nav.navbar-right
-        %li.dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            -if current_user
-              =current_user.email
-            - else
-              Login
-            %span.caret
-          %ul.dropdown-menu
-            %li
-              -if current_user
-                =link_to "Logout", destroy_user_session_path, method: :delete
-              - else
-                =link_to "Login", new_user_session_path
-            %li.divider{:role => "separator"}
-            %li
-              %a{:href => "#"} Some Other Link...
+%nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+  %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarText", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarText", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  =link_to t(:smugglers_kitchen), root_path, class: "navbar-brand"
+  #navbarText.collapse.navbar-collapse
+    %ul.navbar-nav.mr-auto
+      %li.nav-item.active
+        =link_to t(:synchronisation), synchronisation_index_path, class: "nav-link"
+      %li.nav-item
+        %a.nav-link{:href => "#"} Dummy
+    .dropdown
+      %button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+        -if current_user
+          =current_user.email
+        - else
+          Login
+      .dropdown-menu{"aria-labelledby" => "dropdownMenuButton"}
+        -if current_user
+          =link_to "Logout", destroy_user_session_path, method: :delete
+        - else
+          =link_to "Login", new_user_session_path

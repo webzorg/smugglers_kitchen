@@ -1,5 +1,7 @@
 {
   "name": "smugglers_kitchen",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "alertifyjs": "^1.10.0"
+  }
 }
