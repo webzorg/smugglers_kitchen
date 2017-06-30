@@ -24,18 +24,21 @@ class SynchronisationController < ApplicationController
       )
     end
 
-    finish = Time.zone.now # Finish time elapse
-
-    @time_elapsed = "#{t(:operation_finished)} #{(finish - start).round(3)} #{t(:in_seconds)}."
     if savon_response.http.code == 200
       update_operation_updated_at(operation_code)
+
       @json_response = savon_response.body.to_s
       @type = "success"
       @message = t(:synchronisation_is_successful)
+
+      helper_sync(operation_code, savon_response.body) if (0..4).cover?(operation_code)
     else
       @type = "error"
       @message = t(:synchronisation_is_unsuccessful)
     end
+
+    finish = Time.zone.now # Finish time elapse
+    @time_elapsed = "#{t(:operation_finished)} #{(finish - start).round(3)} #{t(:in_seconds)}."
   end
 
   private
@@ -67,6 +70,7 @@ class SynchronisationController < ApplicationController
       ).update_attributes(updated_at: Time.zone.now)
     end
 
+    # Update operations table ONLY if empty
     def get_operations(initialize_savon)
       helper_refresh_operations_table(initialize_savon)
     end

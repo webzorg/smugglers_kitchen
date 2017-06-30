@@ -18,7 +18,11 @@
 //= require_tree .
 
 document.addEventListener("turbolinks:load", function() {
+  synchroniser();
+  alertify_options();
+});
 
+function synchroniser(){
   $(".synchronise-action").click( function() {
     const AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
     request = $.ajax({
@@ -43,11 +47,7 @@ document.addEventListener("turbolinks:load", function() {
     .fail(() => alertify.error("მოიცა რა."))
     // .always(() => console.log("complete"));
   });
-
-  alertify_options();
-});
-
-// sms - ajax patch request.
+}
 
 function alertify_options(){
   alertify.defaults = {
