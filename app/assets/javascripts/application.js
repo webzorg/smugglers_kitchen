@@ -30,9 +30,10 @@ document.addEventListener("turbolinks:load", function() {
       },
       data: {
         synchronisation: {
-          operation_code: $(this).attr("operation_code")
+          operation_code: $(this).attr("operation_code"),
+          week_date: $('#week_date option:selected').val()
         }
-      },
+      }
     })
     .done((msg) => {
       $(".response-div").html( msg.json_response );

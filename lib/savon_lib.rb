@@ -11,32 +11,26 @@ module SavonLib
     user = ENV["user"]
     pass = ENV["pass"]
 
-    savon = Savon.client(
+    Savon.client(
       wsdl: wsdl_url, basic_auth: [user, pass],
       # log: true, log_level: :debug, pretty_print_xml: true
     )
+  end
 
+  def helper_get_response_body(sav, action_index)
+    sav.call(sav.operations[action_index], message: { "ModeFull" => true })
+  end
+
+  def helper_get_client_debt_data(sav, action_index, date)
+    sav.call(sav.operations[action_index], message: { "CreateDate" => date })
+  end
+
+  def helper_refresh_operations_table(savon)
     savon.operations.each_with_index do |operation, index|
       Operation.find_or_create_by(
         operation_code: index,
         operation_name: operation.to_s.sub("get_", "").humanize
       )
     end
-
-    savon
-  end
-
-  def helper_get_response_body(sav, action_index)
-    @asd = sav.call(
-      sav.operations[action_index],
-      message: { "ModeFull" => true }
-    )
-  end
-
-  def helper_get_client_debt_data(sav, action_index, date)
-    sav.call(
-      sav.operations[action_index],
-      message: { "CreateDate" => date }
-    ).body
   end
 end

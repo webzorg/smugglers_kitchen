@@ -1,4 +1,6 @@
-%h1 Synchronisation
+%br
+%h1 Synchronisations
+%br
 
 %table.custom-table.table.table-bordered.table-hover
   %thead.thead-default
@@ -12,13 +14,16 @@
       %tr
         %td= index
         %td= operation.operation_name
-        %td= operation.updated_at.localtime
+        %td= operation.time_from_last_sync
         %td
+          -if index == 6
+            -# = select_date Date.today, { prefix: :date, with_css_classes: true}, { class: "custom-select" }
+            = select_tag :week_date, options_for_select(@mondays_array), class: "custom-select date"
+            %br
+            %br
+
           %button{ class: "synchronise-action btn btn-info",
                    operation_code: operation.operation_code }
             Synchronise
-
-
-%button.synchronise-action Ajax
 
 .response-div

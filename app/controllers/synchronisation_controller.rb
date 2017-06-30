@@ -3,7 +3,11 @@ class SynchronisationController < ApplicationController
   include SavonLib
 
   def index
+    # initialize operations table
+    get_operations(initialize_savon) if Operation.all.empty?
     @operations = Operation.all
+
+    @mondays_array = initialize_monday_array
   end
 
   def synchronise_action
@@ -11,18 +15,21 @@ class SynchronisationController < ApplicationController
 
     savon_response = nil
     operation_code = synchronisation_params[:operation_code].to_i
+
     if (0..4).cover?(operation_code)
       savon_response = get_operation(operation_code)
-      @json_response = savon_response.body.to_h.to_s
     elsif operation_code == 5
-      client_debt_data(Date.new(2017, 5, 29))
+      savon_response = client_debt_data(
+        synchronisation_params[:week_date].to_date
+      )
     end
 
     finish = Time.zone.now # Finish time elapse
 
     @time_elapsed = "#{t(:operation_finished)} #{(finish - start).round(3)} #{t(:in_seconds)}."
     if savon_response.http.code == 200
-      Operation.find_by(operation_code: operation_code).update_attributes(updated_at: Time.zone.now)
+      update_operation_updated_at(operation_code)
+      @json_response = savon_response.body.to_s
       @type = "success"
       @message = t(:synchronisation_is_successful)
     else
@@ -40,6 +47,30 @@ class SynchronisationController < ApplicationController
     # 4 :get_contracts
     # 5 :get_client_debt_data_view_model
 
+    def initialize_monday_array
+      date_index = Date.commercial(2017, 1, 1)
+      index = 1
+      arr = []
+
+      until date_index >= Time.zone.now.beginning_of_week
+        date_index = Date.commercial(2017, index, 1)
+        arr << ["#{index.to_s.rjust(2, '0')} | #{date_index.strftime('%B %d, %Y')}", date_index]
+        index += 1
+      end
+
+      arr
+    end
+
+    def update_operation_updated_at(operation_code)
+      Operation.find_by(
+        operation_code: operation_code
+      ).update_attributes(updated_at: Time.zone.now)
+    end
+
+    def get_operations(initialize_savon)
+      helper_refresh_operations_table(initialize_savon)
+    end
+
     def get_operation(operation_code)
       helper_get_response_body(initialize_savon, operation_code)
     end
@@ -49,6 +80,6 @@ class SynchronisationController < ApplicationController
     end
 
     def synchronisation_params
-      params.require(:synchronisation).permit(:operation_code)
+      params.require(:synchronisation).permit(:operation_code, :week_date)
     end
 end

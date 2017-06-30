@@ -10,14 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629101057) do
+ActiveRecord::Schema.define(version: 20170629190203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "contractors", force: :cascade do |t|
+    t.string "customer_id"
+    t.string "customer_code"
+    t.string "customer_tin"
+    t.string "customer_actual_address"
+    t.string "customer_legal_address"
+    t.string "customer_type"
+    t.string "customer_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.string "contract_id"
+    t.string "customer_id"
+    t.string "contract_code"
+    t.string "contract_name"
+    t.string "contract_type"
+    t.string "currency_id"
+    t.string "trading_agent_id"
+    t.string "subdivision_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "currencies", force: :cascade do |t|
+    t.string "currency_id"
+    t.string "currency_code"
+    t.string "currency_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "operations", force: :cascade do |t|
     t.string "operation_code"
     t.string "operation_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subdivisions", force: :cascade do |t|
+    t.string "subdivision_id"
+    t.string "subdivision_code"
+    t.string "subdivision_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trading_agents", force: :cascade do |t|
+    t.string "trading_agent_id"
+    t.string "trading_agent_code"
+    t.string "trading_agent_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
