@@ -7,7 +7,7 @@ class SynchronisationController < ApplicationController
     get_operations(initialize_savon) if Operation.all.empty?
     @operations = Operation.all
 
-    @mondays_array = initialize_monday_array
+    @mondays_array = helper_initialize_monday_array
   end
 
   def synchronise_action
@@ -49,20 +49,6 @@ class SynchronisationController < ApplicationController
     # 3 :get_contractors
     # 4 :get_contracts
     # 5 :get_client_debt_data_view_model
-
-    def initialize_monday_array
-      date_index = Date.commercial(2017, 1, 1)
-      index = 1
-      arr = []
-
-      until date_index >= Time.zone.now.beginning_of_week
-        date_index = Date.commercial(2017, index, 1)
-        arr << ["#{index.to_s.rjust(2, '0')} | #{date_index.strftime('%B %d, %Y')}", date_index]
-        index += 1
-      end
-
-      arr
-    end
 
     def update_operation_updated_at(operation_code)
       Operation.find_by(
