@@ -39,28 +39,33 @@ module SavonLib
     case operation_code
     when 0
       savon_body[:get_subdivision_response][:return][:subdivision_row].each do |subdivision|
-        temp = Subdivision.find_or_create_by(subdivision)
-        temp.update_attributes(subdivision)
+        Subdivision.find_or_create_by(
+          subdivision_id: subdivision[:subdivision_id]
+        ).update_attributes(subdivision)
       end
     when 1
       savon_body[:get_trading_agents_response][:return][:trading_agents_row].each do |trading_agent|
-        temp = TradingAgent.find_or_create_by(trading_agent)
-        temp.update_attributes(trading_agent)
+        TradingAgent.find_or_create_by(
+          trading_agent_id: trading_agent[:trading_agent_id]
+        ).update_attributes(trading_agent)
       end
     when 2
       savon_body[:get_currencies_response][:return][:currencies_row].each do |currency|
-        temp = Currency.find_or_create_by(currency)
-        temp.update_attributes(currency)
+        Currency.find_or_create_by(
+          currency_id: currency[:currency_id]
+        ).update_attributes(currency)
       end
     when 3
       savon_body[:get_contractors_response][:return][:contractor_row].each do |contractor|
-        temp = Contractor.find_or_create_by(contractor)
-        temp.update_attributes(contractor)
+        Contractor.find_or_create_by(
+          customer_id: contractor[:customer_id] # Field names don't match model.
+        ).update_attributes(contractor)
       end
     when 4
       savon_body[:get_contracts_response][:return][:contracts_row].each do |contract|
-        temp = Contract.find_or_create_by(contract)
-        temp.update_attributes(contract)
+        Contract.find_or_create_by(
+          contract_id: contract[:contract_id]
+        ).update_attributes(contract)
       end
     end
   end
