@@ -1,5 +1,7 @@
 @import "bootstrap";
 @import "alertifyjs/build/css/alertify";
+@import "select2";
+@import "select2-bootstrap";
 @import "*"; //require current dir
 
 $black: #000;
@@ -19,4 +21,44 @@ $sgi-brightgray: #c5c1aa;
 .response-div {
   border: 1px solid $black;
   padding: 1em;
+}
+
+#contractor-selector {
+  width: 20em;
+}
+
+.analytics-header-wrapper,
+.analytics-selectors-wrapper,
+.analytics-info-wrapper,
+.analytics-contract-info,
+.analytics-contractor-info {
+  border: 1px solid $gray;
+  border-radius: 0.5em;
+}
+
+.analytics-header-wrapper {
+  padding: 0.5em;
+  display: flex;
+
+  .analytics-selectors-wrapper {
+    padding: 1em 0.5em;
+    margin-right: 0.5em;
+  }
+
+  .analytics-info-wrapper {
+    padding: 0.5em;
+    display: flex;
+    width: 100%;
+
+    .analytics-contract-info {
+      width: 30%;
+      padding: 1em 0.25em;
+      margin-right: 0.5em;
+    }
+
+    .analytics-contractor-info {
+      width: 70%;
+      padding: 1em 0.25em;
+    }
+  }
 }

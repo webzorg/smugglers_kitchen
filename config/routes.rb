@@ -5,4 +5,8 @@ Rails.application.routes.draw do
 
   get "synchronisation/index"
   patch "synchronisation/synchronise_action"
+
+  get "analytics/index"
+  patch "analytics/select_preseller_action"
+  patch "analytics/select_contractor_action"
 end

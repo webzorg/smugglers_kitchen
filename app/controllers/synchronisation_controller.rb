@@ -9,7 +9,6 @@ class SynchronisationController < ApplicationController
     # initialize operations table
     get_operations(initialize_savon) if Operation.all.empty?
     @operations = Operation.all
-
     @mondays_array = initialize_mondays_array
   end
 

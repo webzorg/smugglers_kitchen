@@ -76,7 +76,6 @@ module SavonLib
         week = Week.find_or_create_by(
           monday: Date.commercial(monday_date.year, monday_date.cweek, 1)
         )
-
         savon_response = get_client_debt_data(savon, operation_code, monday_date)
 
         if !savon_response.nil? && savon_response.http.code == 200

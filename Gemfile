@@ -19,6 +19,7 @@ gem "haml-rails" # rails haml:erb2haml
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails"
 gem "kaminari"
+gem "select2-rails"
 gem "turbolinks", "~> 5"
 
 gem "savon"

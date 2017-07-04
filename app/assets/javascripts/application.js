@@ -14,12 +14,16 @@
 //= require jquery
 //= require bootstrap
 //= require alertifyjs/build/alertify
+//= require select2
 //= require turbolinks
 //= require_tree .
 
 document.addEventListener("turbolinks:load", function() {
   synchroniser();
   alertify_options();
+
+  preseller_selector();
+  contractor_selector();
 });
 
 function synchroniser(){
@@ -40,6 +44,66 @@ function synchroniser(){
     .done((msg) => {
       alertify[msg.type](msg.message);
       alertify.warning(msg.time_elapsed);
+    })
+    .fail(() => alertify.error("Something went wrong. Contact the local administrator."))
+    // .always(() => console.log("complete"));
+  });
+}
+
+function preseller_selector(){
+  $("#preseller_id").change( function() {
+    const AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
+    request = $.ajax({
+      type: "PATCH",
+      dataType: "json",
+      url: "/analytics/select_preseller_action",
+      headers: { 'X_CSRF_TOKEN': AUTH_TOKEN, },
+      data: {
+        analytics: {
+          preseller_id: $(this).val()
+        }
+      }
+    })
+    .done((msg) => {
+      // $(".test-div").html(msg.contractors); # debugging
+      $("#contractor-selector").empty().append(msg.contractors);
+    })
+    .fail(() => alertify.error("Something went wrong. Contact the local administrator."))
+    // .always(() => console.log("complete"));
+  });
+}
+
+function contractor_selector(){
+  $("#contractor-selector").select2({ theme: "bootstrap" }).change(function() {
+    const AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
+    request = $.ajax({
+      type: "PATCH",
+      dataType: "json",
+      url: "/analytics/select_contractor_action",
+      headers: { 'X_CSRF_TOKEN': AUTH_TOKEN, },
+      data: {
+        analytics: {
+          contractor_id: $(this).val()
+        }
+      }
+    })
+    .done((msg) => {
+      $(".contract-name").html(msg.contract_name);
+      $(".contract-type").html(msg.contract_type);
+      $(".contract-currency").html(msg.contract_currency);
+      $(".contract-preseller").html(msg.contract_preseller);
+      $(".contract-subdivision").html(msg.contract_subdivision);
+
+      $(".contractor-name").html(msg.contractor_name);
+      $(".contractor-code").html(msg.contractor_code);
+      $(".contractor-state-id").html(msg.contractor_state_id);
+      $(".contractor-physical-address").html(msg.contractor_physical_address);
+      $(".contractor-legal-address").html(msg.contractor_legal_address);
+      $(".contractor-type").html(msg.contractor_type);
+
+      $(".test-div").append(msg.client_debt_data);
+      // alertify[msg.type](msg.message);
+      // alertify.warning(msg.time_elapsed);
     })
     .fail(() => alertify.error("Something went wrong. Contact the local administrator."))
     // .always(() => console.log("complete"));
