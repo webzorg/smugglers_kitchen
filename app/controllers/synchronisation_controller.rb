@@ -1,13 +1,16 @@
 class SynchronisationController < ApplicationController
   respond_to :json, only: [:synchronise_action]
   include SavonLib
+  include ActionView::Helpers::DateHelper
+
+  YEAR_SETTER = 2016
 
   def index
     # initialize operations table
     get_operations(initialize_savon) if Operation.all.empty?
     @operations = Operation.all
 
-    @mondays_array = initialize_monday_array
+    @mondays_array = initialize_mondays_array
   end
 
   def synchronise_action
@@ -16,29 +19,28 @@ class SynchronisationController < ApplicationController
     savon_response = nil
     operation_code = synchronisation_params[:operation_code].to_i
 
-    if (0..4).cover?(operation_code)
-      savon_response = get_operation(operation_code)
-    elsif operation_code == 5
-      savon_response = client_debt_data(
-        synchronisation_params[:week_date].to_date
-      )
-    end
+    savon_response = get_operation(operation_code) if (0..4).cover?(operation_code)
 
-    if savon_response.http.code == 200
+    if !savon_response.nil? && savon_response.http.code == 200
       update_operation_updated_at(operation_code)
 
-      @json_response = savon_response.body.to_s
       @type = "success"
       @message = t(:synchronisation_is_successful)
 
-      helper_sync(operation_code, savon_response.body) if (0..4).cover?(operation_code)
+      if (0..4).cover?(operation_code)
+        helper_sync(operation_code, savon_response.body)
+      end
+    elsif operation_code == 5
+      resp = helper_sync(operation_code, nil, synchronisation_params[:week_date].to_date)
+      @type = resp[0]
+      update_operation_updated_at(operation_code) if @type == "success"
+      @message = resp[1]
     else
       @type = "error"
-      @message = t(:synchronisation_is_unsuccessful)
+      @message = t(:sync_failed)
     end
 
-    finish = Time.zone.now # Finish time elapse
-    @time_elapsed = "#{t(:operation_finished)} #{(finish - start).round(3)} #{t(:in_seconds)}."
+    @time_elapsed = "#{t(:operation_finished_in)} #{time_ago_in_words(start, include_seconds: true)}."
   end
 
   private
@@ -50,15 +52,12 @@ class SynchronisationController < ApplicationController
     # 4 :get_contracts
     # 5 :get_client_debt_data_view_model
 
-    def initialize_monday_array
-      date_index = Date.commercial(2017, 1, 1)
-      index = 1
+    def initialize_mondays_array
+      date_index = Date.commercial(YEAR_SETTER, 1, 1)
       arr = []
-
       until date_index >= Time.zone.now.beginning_of_week
-        date_index = Date.commercial(2017, index, 1)
-        arr << ["#{index.to_s.rjust(2, '0')} | #{date_index.strftime('%B %d, %Y')}", date_index]
-        index += 1
+        arr << ["#{date_index.cweek.to_s.rjust(2, '0')} | #{date_index.strftime('%B %d, %Y')}", date_index]
+        date_index = date_index.next_week
       end
 
       arr
@@ -77,10 +76,6 @@ class SynchronisationController < ApplicationController
 
     def get_operation(operation_code)
       helper_get_response_body(initialize_savon, operation_code)
-    end
-
-    def client_debt_data(date)
-      helper_get_client_debt_data(initialize_savon, 5, date)
     end
 
     def synchronisation_params

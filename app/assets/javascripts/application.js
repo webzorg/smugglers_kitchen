@@ -29,9 +29,7 @@ function synchroniser(){
       type: "PATCH",
       dataType: "json",
       url: "/synchronisation/synchronise_action",
-      headers: {
-        'X_CSRF_TOKEN': AUTH_TOKEN,
-      },
+      headers: { 'X_CSRF_TOKEN': AUTH_TOKEN, },
       data: {
         synchronisation: {
           operation_code: $(this).attr("operation_code"),
@@ -40,11 +38,10 @@ function synchroniser(){
       }
     })
     .done((msg) => {
-      $(".response-div").html( msg.json_response );
-      alertify[msg.type](msg.message)
-      alertify.warning(msg.time_elapsed)
+      alertify[msg.type](msg.message);
+      alertify.warning(msg.time_elapsed);
     })
-    .fail(() => alertify.error("მოიცა რა."))
+    .fail(() => alertify.error("Something went wrong. Contact the local administrator."))
     // .always(() => console.log("complete"));
   });
 }
@@ -74,9 +71,9 @@ function alertify_options(){
     // notifier defaults
     notifier:{
         // auto-dismiss wait time (in seconds)
-        delay:6,
+        delay: 10,
         // default position
-        position:'top-right',
+        position: 'top-right',
         // adds a close button to notifier messages
         closeButton: false
     },

@@ -1,9 +1,15 @@
 ---
 en:
+  and_failed: and failed
+  dummy: Dummy
   hello: Hello world
   in_seconds: In seconds
   operation_finished: Operation finished
+  operation_finished_in: Operation finished in
   smugglers_kitchen: Smugglers kitchen
+  successfully_synced: Succesffully synced
+  sync_failed: Sync failed
   synchronisation: Synchronisation
   synchronisation_is_successful: Synchronisation is successful
   synchronisation_is_unsuccessful: Synchronisation is unsuccessful
+  weeks_of_data: Week(s) of data

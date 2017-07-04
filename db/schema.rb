@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629190203) do
+ActiveRecord::Schema.define(version: 20170703091732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "client_debt_data", force: :cascade do |t|
+    t.string "contract_id"
+    t.string "amount_beginning"
+    t.string "sales"
+    t.string "sales_returns"
+    t.string "debt_adjustment"
+    t.string "payment"
+    t.string "amount_returns"
+    t.string "amount_the_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "week_id"
+    t.index ["week_id"], name: "index_client_debt_data_on_week_id"
+  end
 
   create_table "contractors", force: :cascade do |t|
     t.string "customer_id"
@@ -83,6 +98,12 @@ ActiveRecord::Schema.define(version: 20170629190203) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "weeks", force: :cascade do |t|
+    t.datetime "monday"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
