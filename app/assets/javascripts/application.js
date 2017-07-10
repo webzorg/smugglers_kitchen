@@ -41,7 +41,7 @@ function synchroniser(){
         }
       }
     })
-    .done((msg) => {
+    .done(function(msg) {
       alertify[msg.type](msg.message);
       alertify.warning(msg.time_elapsed);
     })
@@ -64,7 +64,7 @@ function preseller_selector(){
         }
       }
     })
-    .done((msg) => {
+    .done(function(msg) {
       // $(".test-div").html(msg.contractors); # debugging
       $("#contractor-selector").empty().append(msg.contractors);
     })
@@ -88,7 +88,7 @@ function contractor_selector(){
         }
       }
     })
-    .done((msg) => {
+    .done(function(msg) {
       $(".contract-name").html(msg.contract_name);
       $(".contract-type").html(msg.contract_type);
       $(".contract-currency").html(msg.contract_currency);
@@ -106,7 +106,7 @@ function contractor_selector(){
       // alertify[msg.type](msg.message);
       // alertify.warning(msg.time_elapsed);
     })
-    .fail(() => alertify.error("Something went wrong. Contact the local administrator."))
+    .fail(function(){ alertify.error("Something went wrong. Contact the local administrator.")})
     // .always(() => console.log("complete"));
   });
 }

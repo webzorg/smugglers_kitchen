@@ -30,6 +30,12 @@ group :development, :test do
 end
 
 group :development do
+  gem "capistrano"
+  gem "capistrano-bundler"
+  gem "capistrano-passenger"
+  gem "capistrano-rails"
+  gem "capistrano-rvm"
+
   gem "i18n-tasks", "~> 0.9.6"
   gem "i18n_generators", "~> 2.1", ">= 2.1.1"
 
