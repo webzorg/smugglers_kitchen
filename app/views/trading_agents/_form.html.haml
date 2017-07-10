@@ -1,0 +1,20 @@
+= form_for @trading_agent do |f|
+  - if @trading_agent.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@trading_agent.errors.count, "error")} prohibited this trading_agent from being saved:"
+      %ul
+        - @trading_agent.errors.full_messages.each do |message|
+          %li= message
+
+  .form-group
+    = f.label :trading_agent_code
+    = f.text_field :trading_agent_code, readonly: true
+  .form-group
+    = f.label :trading_agent_name
+    = f.text_field :trading_agent_name, readonly: true
+  .form-check
+    %label.form-check-label
+      = f.check_box :preseller, class: "form-check-input"
+      = t(:preseller)
+  .actions
+    = f.submit "Save", class: "btn btn-default"

@@ -1,0 +1,2 @@
+module TradingAgentsHelper
+end

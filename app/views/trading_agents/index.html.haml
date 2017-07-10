@@ -1,0 +1,19 @@
+%h1=t(:trading_agents)
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th.col-sm-5 Trading agent code
+      %th.col-sm-5 Trading agent name
+      %th.col-sm-1 Preseller
+      %th.col-sm-1
+
+  %tbody
+    - @trading_agents.each do |trading_agent|
+      %tr
+        %td= trading_agent.trading_agent_code
+        %td= trading_agent.trading_agent_name
+        %td= trading_agent.preseller
+        %td= link_to "Edit", edit_trading_agent_path(trading_agent), class: "btn btn-warning"
+
+%br

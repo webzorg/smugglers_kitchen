@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   get "analytics/index"
   patch "analytics/select_preseller_action"
   patch "analytics/select_contractor_action"
+
+  resources :trading_agents, only: [:index, :edit, :update]
 end

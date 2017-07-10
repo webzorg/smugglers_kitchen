@@ -1,93 +1,23 @@
-%br
 %h1=t(:analytics)
 %br
-.analytics-header-wrapper
-  .analytics-selectors-wrapper
-    =t(:presellers)
-    %br
-    =collection_select(:preseller, :id, @presellers, :id, :trading_agent_name, {prompt: true}, {class: "custom-select", autocomplete: "off"})
-    %br
-    %br
-    =t(:contractors)
-    =select_tag :contractor_id, nil, id: "contractor-selector"
-  .analytics-info-wrapper
-    .analytics-contract-info
-      %h5
-        =t(:contract_info)
-
-      .field
-        %span.field-name
-          -concat t(:contract_name)
-          -concat ": "
-        %span.contract-name
-
-      .field
-        %span.field-name
-          -concat t(:contract_type)
-          -concat ": "
-        %span.contract-type
-
-      .field
-        %span.field-name
-          -concat t(:currency)
-          -concat ": "
-        %span.contract-currency
-
-      .field
-        %span.field-name
-          -concat t(:preseller)
-          -concat ": "
-        %span.contract-preseller
-
-      .field
-        %span.field-name
-          -concat t(:subdivision)
-          -concat ": "
-        %span.contract-subdivision
-
-    .analytics-contractor-info
-      %h5
-        =t(:contractor_info)
-
-      .field
-        %span.field-name
-          -concat t(:contractor_name)
-          -concat ": "
-        %span.contractor-name
-
-      .field
-        %span.field-name
-          -concat t(:contractor_code)
-          -concat ": "
-        %span.contractor-code
-
-      .field
-        %span.field-name
-          -concat t(:contractor_state_id)
-          -concat ": "
-        %span.contractor-state-id
-
-      .field
-        %span.field-name
-          -concat t(:contractor_physical_address)
-          -concat ": "
-        %span.contractor-physical-address
-
-      .field
-        %span.field-name
-          -concat t(:contractor_legal_address)
-          -concat ": "
-        %span.contractor-legal-address
-
-      .field
-        %span.field-name
-          -concat t(:contractor_type)
-          -concat ": "
-        %span.contractor-type
+.analytics-header-wrapper.container-fluid
+  .row
+    .col-wrapper.col-sm-3
+      .col-wrapper-inner
+        =t(:select_year)
+        %br
+        =select_year Date.today, { start_year: 2014, end_year: Date.today.year }, { class: "custom-select" }
+        %br
+        %br
+        =t(:presellers)
+        %br
+        =collection_select(:preseller, :id, @presellers, :id, :trading_agent_name, {prompt: true}, {class: "custom-select", autocomplete: "off"})
+        %br
+        %br
+        =t(:contractors)
+        =select_tag :contractor_id, nil, { prompt: "--#{t(:select_preseller_first)}--", id: "contractor-selector", class: "", autocomplete: "off"}
+    = render "analytics_info_wrapper_data"
 
 %br
-%br
-%br
 
-.test-div{style: "border: 1px solid black; padding: 1em;"}
-  test
+.analytics-body-wrapper

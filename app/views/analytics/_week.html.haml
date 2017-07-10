@@ -1,0 +1,47 @@
+.week-header
+  %h5
+    %span.week-number=week_number
+    =date
+.week-body
+  %dl.row
+    -if (client_debt_datum.amount_beginning - client_debt_datum.amount_the_end) != 0 || client_debt_datum.sales != 0 || client_debt_datum.payment != 0
+      %dt.col-sm-2=t(:amount_beggining)
+      %dd.col-sm-10
+        %span.amount-beginning
+          = client_debt_datum.amount_beginning unless client_debt_datum.nil?
+
+    -if client_debt_datum.sales != 0
+      %dt.col-sm-2=t(:sales)
+      %dd.col-sm-10
+        %span.sales
+          = client_debt_datum.sales unless client_debt_datum.nil?
+
+    -if client_debt_datum.sales_returns != 0
+      %dt.col-sm-2=t(:sales_returns)
+      %dd.col-sm-10
+        %span.sales-returns
+          = client_debt_datum.sales_returns unless client_debt_datum.nil?
+
+    -if client_debt_datum.debt_adjustment != 0
+      %dt.col-sm-2=t(:debt_adjustment)
+      %dd.col-sm-10
+        %span.debt-adjustment
+          = client_debt_datum.debt_adjustment unless client_debt_datum.nil?
+
+    -if client_debt_datum.payment != 0
+      %dt.col-sm-2=t(:payment)
+      %dd.col-sm-10
+        %span.payment
+          = client_debt_datum.payment unless client_debt_datum.nil?
+
+    -if client_debt_datum.amount_returns != 0
+      %dt.col-sm-2=t(:amount_returns)
+      %dd.col-sm-10
+        %span.amount-returns
+          = client_debt_datum.amount_returns unless client_debt_datum.nil?
+
+    -if client_debt_datum.amount_the_end != 0
+      %dt.col-sm-2=t(:amount_the_end)
+      %dd.col-sm-10
+        %span.amount-the-end
+          = client_debt_datum.amount_the_end unless client_debt_datum.nil?

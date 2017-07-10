@@ -1,15 +1,35 @@
 ---
 en:
-  and_failed: and failed
-  dummy: Dummy
-  hello: Hello world
-  in_seconds: In seconds
-  operation_finished: Operation finished
+  amount_beggining: Amount beggining
+  amount_returns: Amount returns
+  amount_the_end: Amount the end
+  analytics: Analytics
+  contract_info: Contract info
+  contract_name: Contract name
+  contract_type: Contract type
+  contractor_code: Contractor code
+  contractor_info: Contractor info
+  contractor_legal_address: Contractor legal address
+  contractor_name: Contractor name
+  contractor_physical_address: Contractor physical address
+  contractor_state_id: Contractor state
+  contractor_type: Contractor type
+  contractors: Contractors
+  currency: Currency
+  debt_adjustment: Debt adjustment
+  editing_trading_agent: Editing trading agent
   operation_finished_in: Operation finished in
+  payment: Payment
+  preseller: Preseller
+  presellers: Presellers
+  sales: Sales
+  sales_returns: Sales returns
+  select_contractor: Select contractor
+  select_preseller_first: Select preseller first
   smugglers_kitchen: Smugglers kitchen
-  successfully_synced: Succesffully synced
+  subdivision: Subdivision
   sync_failed: Sync failed
   synchronisation: Synchronisation
   synchronisation_is_successful: Synchronisation is successful
-  synchronisation_is_unsuccessful: Synchronisation is unsuccessful
-  weeks_of_data: Week(s) of data
+  trading_agents: Trading agents
+  welcome_to_smugglers_kitchen: Welcome to smugglers kitchen

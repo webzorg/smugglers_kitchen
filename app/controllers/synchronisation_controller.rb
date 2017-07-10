@@ -3,8 +3,6 @@ class SynchronisationController < ApplicationController
   include SavonLib
   include ActionView::Helpers::DateHelper
 
-  YEAR_SETTER = 2016
-
   def index
     # initialize operations table
     get_operations(initialize_savon) if Operation.all.empty?
@@ -59,7 +57,7 @@ class SynchronisationController < ApplicationController
         date_index = date_index.next_week
       end
 
-      arr
+      arr.reverse
     end
 
     def update_operation_updated_at(operation_code)

@@ -83,7 +83,8 @@ function contractor_selector(){
       headers: { 'X_CSRF_TOKEN': AUTH_TOKEN, },
       data: {
         analytics: {
-          contractor_id: $(this).val()
+          contractor_id: $(this).val(),
+          year: $("#date_year").val()
         }
       }
     })
@@ -101,7 +102,7 @@ function contractor_selector(){
       $(".contractor-legal-address").html(msg.contractor_legal_address);
       $(".contractor-type").html(msg.contractor_type);
 
-      $(".test-div").append(msg.client_debt_data);
+      $(".analytics-body-wrapper").html(msg.client_debt_data);
       // alertify[msg.type](msg.message);
       // alertify.warning(msg.time_elapsed);
     })

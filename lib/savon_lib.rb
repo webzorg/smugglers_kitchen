@@ -62,11 +62,17 @@ module SavonLib
           customer_id: contractor[:customer_id] # Field names don't match model name.
         ).update_attributes(contractor)
       end
+      update_contractor_debt
     when 4
       savon_body[:get_contracts_response][:return][:contracts_row].each do |contract|
-        Contract.find_or_create_by(
-          contract_id: contract[:contract_id]
-        ).update_attributes(contract)
+        # Only imports buyers. Skips suppliers.
+        next if contract[:contract_type] == "მომწოდებელთან"
+        contract_temp = Contract.find_by(contract_id: contract[:contract_id])
+        if contract_temp
+          contract_temp.update_attributes(contract)
+        else
+          Contract.create(contract)
+        end
       end
     when 5
       successfull_syncs = failed_syncs = 0
@@ -95,23 +101,35 @@ module SavonLib
         end
       end
 
+      update_contractor_debt
       generate_flash_message(successfull_syncs, failed_syncs)
     end
   end
 
-  def generate_flash_message(successfull_syncs, failed_syncs)
-    if failed_syncs.zero?
-      type = "success"
-      message = "#{I18n.t(:successfully_synced)} #{successfull_syncs} #{I18n.t(:weeks_of_data)}"
-    elsif successfull_syncs.zero?
-      type = "error"
-      message = I18n.t(:client_debt_data_sync_failed)
-    else
-      type = "warning"
-      message = "
-        #{I18n.t(:successfully_synced)} #{successfull_syncs} #{I18n.t(:weeks_of_data)} \n
-        #{I18n.t(:and_failed)} #{failed_syncs} #{I18n.t(:weeks_of_data)}"
+  private
+
+    def update_contractor_debt
+      Contractor.all.each do |contractor|
+        next if contractor.client_debt_data.empty?
+        contractor.update_attributes(
+          debt: contractor.client_debt_data.by_weeks_ascending.last.amount_the_end
+        )
+      end
     end
-    [type, message]
-  end
+
+    def generate_flash_message(successfull_syncs, failed_syncs)
+      if failed_syncs.zero?
+        type = "success"
+        message = "#{I18n.t(:successfully_synced)} #{successfull_syncs} #{I18n.t(:weeks_of_data)}"
+      elsif successfull_syncs.zero?
+        type = "error"
+        message = I18n.t(:client_debt_data_sync_failed)
+      else
+        type = "warning"
+        message = "
+          #{I18n.t(:successfully_synced)} #{successfull_syncs} #{I18n.t(:weeks_of_data)} \n
+          #{I18n.t(:and_failed)} #{failed_syncs} #{I18n.t(:weeks_of_data)}"
+      end
+      [type, message]
+    end
 end

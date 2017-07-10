@@ -4,4 +4,6 @@ class Contract < ApplicationRecord
   belongs_to :trading_agent
   belongs_to :currency
   belongs_to :contractor, foreign_key: :customer_id
+
+  # scope :sort_by_heighest_debt, -> { order(preseller: true) }
 end

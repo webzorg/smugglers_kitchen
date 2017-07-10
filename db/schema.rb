@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704081817) do
+ActiveRecord::Schema.define(version: 20170710102029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "client_debt_data", force: :cascade do |t|
     t.string "contract_id"
-    t.string "amount_beginning"
-    t.string "sales"
-    t.string "sales_returns"
-    t.string "debt_adjustment"
-    t.string "payment"
-    t.string "amount_returns"
-    t.string "amount_the_end"
+    t.float "amount_beginning", default: 0.0, null: false
+    t.float "sales", default: 0.0, null: false
+    t.float "sales_returns", default: 0.0, null: false
+    t.float "debt_adjustment", default: 0.0, null: false
+    t.float "payment", default: 0.0, null: false
+    t.float "amount_returns", default: 0.0, null: false
+    t.float "amount_the_end", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "week_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20170704081817) do
     t.string "customer_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "debt", default: 0.0, null: false
   end
 
   create_table "contracts", force: :cascade do |t|
