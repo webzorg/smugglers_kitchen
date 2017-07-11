@@ -8,7 +8,7 @@ function synchroniser(){
       type: "PATCH",
       dataType: "json",
       url: "/synchronisation/synchronise_action",
-      headers: { 'X_CSRF_TOKEN': AUTH_TOKEN, },
+      headers: { 'X-CSRF-TOKEN': AUTH_TOKEN, },
       data: {
         synchronisation: {
           operation_code: $(this).attr("operation_code"),
@@ -32,7 +32,7 @@ function preseller_selector(){
       type: "PATCH",
       dataType: "json",
       url: "/analytics/select_preseller_action",
-      headers: { 'X_CSRF_TOKEN': AUTH_TOKEN, },
+      headers: { 'X-CSRF-TOKEN': AUTH_TOKEN, },
       data: {
         analytics: {
           preseller_id: $(this).val()
@@ -55,7 +55,7 @@ function contractor_selector(){
       type: "PATCH",
       dataType: "json",
       url: "/analytics/select_contractor_action",
-      headers: { 'X_CSRF_TOKEN': AUTH_TOKEN, },
+      headers: { 'X-CSRF-TOKEN': AUTH_TOKEN, },
       data: {
         analytics: {
           contractor_id: $(this).val(),

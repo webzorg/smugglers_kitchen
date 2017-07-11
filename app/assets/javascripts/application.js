@@ -27,6 +27,4 @@ $(document).on('turbolinks:load', function() {
 
   preseller_selector();
   contractor_selector();
-
-  init_canvasjs();
 });
