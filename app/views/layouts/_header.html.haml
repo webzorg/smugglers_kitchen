@@ -9,7 +9,7 @@
       %li.nav-item
         =link_to t(:synchronisation), synchronisation_index_path, class: "nav-link #{active_class(synchronisation_index_path)}"
       %li.nav-item
-        =link_to t(:trading_agents), trading_agents_path, class: "nav-link #{active_class(synchronisation_index_path)}"
+        =link_to t(:trading_agents), trading_agents_path, class: "nav-link #{active_class(trading_agents_path)}"
     .dropdown
       %button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
         -if current_user

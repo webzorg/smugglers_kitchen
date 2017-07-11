@@ -12,13 +12,14 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require tether
 //= require bootstrap
-//= require alertifyjs/build/alertify
+//= require alertifyjs/build/alertify.min
 //= require select2
 //= require turbolinks
 //= require_tree .
 
-document.addEventListener("turbolinks:load", function() {
+$(document).on('turbolinks:load', function() {
   synchroniser();
   alertify_options();
 
@@ -27,8 +28,8 @@ document.addEventListener("turbolinks:load", function() {
 });
 
 function synchroniser(){
-  $(".synchronise-action").click( function() {
-    const AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
+  $(".synchronise-action").click(function() {
+    var AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
     request = $.ajax({
       type: "PATCH",
       dataType: "json",
@@ -45,14 +46,14 @@ function synchroniser(){
       alertify[msg.type](msg.message);
       alertify.warning(msg.time_elapsed);
     })
-    .fail(() => alertify.error("Something went wrong. Contact the local administrator."))
+    .fail(function(){ alertify.error("Something went wrong. Contact the local administrator.") })
     // .always(() => console.log("complete"));
   });
 }
 
 function preseller_selector(){
   $("#preseller_id").change( function() {
-    const AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
+    var AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
     request = $.ajax({
       type: "PATCH",
       dataType: "json",
@@ -68,14 +69,14 @@ function preseller_selector(){
       // $(".test-div").html(msg.contractors); # debugging
       $("#contractor-selector").empty().append(msg.contractors);
     })
-    .fail(() => alertify.error("Something went wrong. Contact the local administrator."))
+    .fail(function(){ alertify.error("Something went wrong. Contact the local administrator.") })
     // .always(() => console.log("complete"));
   });
 }
 
 function contractor_selector(){
   $("#contractor-selector").select2({ theme: "bootstrap" }).change(function() {
-    const AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
+    var AUTH_TOKEN = $("meta[name=csrf-token]").attr("content");
     request = $.ajax({
       type: "PATCH",
       dataType: "json",
@@ -103,10 +104,10 @@ function contractor_selector(){
       $(".contractor-type").html(msg.contractor_type);
 
       $(".analytics-body-wrapper").html(msg.client_debt_data);
-      // alertify[msg.type](msg.message);
-      // alertify.warning(msg.time_elapsed);
+      alertify[msg.type](msg.message);
+      alertify.warning(msg.time_elapsed);
     })
-    .fail(function(){ alertify.error("Something went wrong. Contact the local administrator.")})
+    .fail(function(){ alertify.error("Something went wrong. Contact the local administrator.") })
     // .always(() => console.log("complete"));
   });
 }

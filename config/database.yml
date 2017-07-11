@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: smugglers_kitchen_production
-  username: smugglers_kitchen
+  username: <%= ENV['SMUGGLERS_KITCHEN_DATABASE_USERNAME'] %>
   password: <%= ENV['SMUGGLERS_KITCHEN_DATABASE_PASSWORD'] %>

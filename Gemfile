@@ -10,9 +10,12 @@ gem "pg", "~> 0.18"
 gem "puma", "~> 3.7"
 gem "rails", "~> 5.1.1"
 gem "sass-rails", "~> 5.0"
-gem "uglifier", ">= 1.3.0"
+# gem "uglifier", ">= 1.3.0"
 
 gem "bootstrap"
+source "https://rails-assets.org" do
+  gem "rails-assets-tether", ">= 1.1.0"
+end
 gem "figaro"
 gem "haml"
 gem "haml-rails" # rails haml:erb2haml

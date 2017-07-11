@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actioncable (5.1.2)
       actionpack (= 5.1.2)
@@ -219,6 +220,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.1.2)
       sprockets-rails (>= 2.0.0)
+    rails-assets-tether (1.1.1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -301,8 +303,6 @@ GEM
     turbolinks-source (5.0.3)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
-    uglifier (3.2.0)
-      execjs (>= 0.3.0, < 3)
     unicode-display_width (1.2.1)
     warden (1.2.7)
       rack (>= 1.0)
@@ -345,6 +345,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rack-livereload
   rails (~> 5.1.1)
+  rails-assets-tether (>= 1.1.0)!
   rubocop
   sass-rails (~> 5.0)
   savon
@@ -353,7 +354,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
-  uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
 
 BUNDLED WITH
