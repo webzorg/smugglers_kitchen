@@ -15,6 +15,7 @@ en:
   contractor_state_id: Contractor state
   contractor_type: Contractor type
   contractors: Contractors
+  contractors_by_debt: Contractors by debt
   currency: Currency
   debt_adjustment: Debt adjustment
   editing_trading_agent: Editing trading agent
@@ -26,6 +27,7 @@ en:
   sales_returns: Sales returns
   select_contractor: Select contractor
   select_preseller_first: Select preseller first
+  select_year: Select year
   smugglers_kitchen: Smugglers kitchen
   subdivision: Subdivision
   sync_failed: Sync failed
