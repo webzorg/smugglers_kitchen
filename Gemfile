@@ -26,7 +26,7 @@ gem "select2-rails"
 gem "turbolinks", "~> 5"
 
 gem "savon"
-gem "passenger"
+# gem "passenger"
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console

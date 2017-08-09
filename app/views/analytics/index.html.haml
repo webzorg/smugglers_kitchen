@@ -2,7 +2,7 @@
 %br
 .analytics-header-wrapper.container-fluid
   .row
-    .col-wrapper.col-sm-3
+    .col-wrapper.col-sm-4
       .col-wrapper-inner
         =t(:select_year)
         %br
@@ -15,7 +15,7 @@
         %br
         %br
         =t(:contractors)
-        =select_tag :contractor_id, nil, { prompt: "--#{t(:select_preseller_first)}--", id: "contractor-selector", class: "", autocomplete: "off"}
+        =select_tag :contractor_id, nil, { prompt: "--#{t(:select_preseller_first)}--", id: "contractor-selector", class: "", autocomplete: "off", style: "width: 100%;"}
     = render "analytics_info_wrapper_data"
 
 %br

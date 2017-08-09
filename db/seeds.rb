@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(email: "l.abulashvili@drunkoctopus.ge", password: "123456")
+User.create(email: "kardashian.anita@gmail.com",    password: "123456")

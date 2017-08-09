@@ -4,6 +4,7 @@ en:
   amount_returns: Amount returns
   amount_the_end: Amount the end
   analytics: Analytics
+  code: Code
   contract_info: Contract info
   contract_name: Contract name
   contract_type: Contract type
@@ -19,8 +20,11 @@ en:
   currency: Currency
   debt_adjustment: Debt adjustment
   editing_trading_agent: Editing trading agent
+  legal_address: Legal address
+  name: Name
   operation_finished_in: Operation finished in
   payment: Payment
+  physical_address: Physical address
   preseller: Preseller
   presellers: Presellers
   sales: Sales
@@ -29,9 +33,11 @@ en:
   select_preseller_first: Select preseller first
   select_year: Select year
   smugglers_kitchen: Smugglers kitchen
+  state_id: State
   subdivision: Subdivision
   sync_failed: Sync failed
   synchronisation: Synchronisation
   synchronisation_is_successful: Synchronisation is successful
   trading_agents: Trading agents
+  type: Type
   welcome_to_smugglers_kitchen: Welcome to smugglers kitchen
