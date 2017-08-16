@@ -1,7 +1,7 @@
 # Helper module for synchronisation c
 module SavonLib
   def initialize_savon
-    wsdl_url = "http://#{ENV['host']}/satesto/ws/WebSiteExchange.1cws?wsdl"
+    wsdl_url = "http://#{ENV['host']}/#{ENV['db_name']}/ws/WebSiteExchange.1cws?wsdl"
     user = ENV["user"]
     pass = ENV["pass"]
 

@@ -17,10 +17,10 @@ function synchroniser(){
       }
     })
     .done(function(msg) {
-      alertify[msg.type](msg.message);
-      alertify.warning(msg.time_elapsed);
+      alertify[msg.type](msg.message, 0);
+      alertify.warning(msg.time_elapsed, 0);
     })
-    .fail(function(){ alertify.error("Something went wrong. Contact the local administrator.") })
+    .fail(function(){ alertify.error("Something went wrong. Contact the local administrator.", 0) })
     .always(function(){ clicked_button.attr("disabled", false); });
   });
 }
